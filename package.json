@@ -1,0 +1,41 @@
+{
+  "name": "gulp-less2js",
+  "description": "Transforms LESS variables to JSON objects",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jkalina/gulp-less2js.git"
+  },
+  "author": "Jakub Kalina <kuba.kalina@gmail.com>",
+  "license": "MIT",
+  "files": [
+    "index.js"
+  ],
+  "keywords": [
+    "gulpplugin",
+    "less",
+    "json"
+  ],
+  "dependencies": {
+    "gulp-util": "^3.0.5",
+    "less": "^1.7.5",
+    "object-assign": "^3.0.0",
+    "path": "^0.11.14",
+    "through2": "^0.6.5",
+    "util": "^0.10.3"
+  },
+  "devDependencies": {
+    "event-stream": "^3.3.1",
+    "gulp-sourcemaps": "^1.5.2",
+    "mocha": "^2.2.5",
+    "should": "^6.0.3",
+    "util": "^0.10.3",
+    "vinyl": "^0.5.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "engines": {
+    "node": ">= 0.10"
+  }
+}
