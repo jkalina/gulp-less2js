@@ -1,7 +1,7 @@
 {
   "name": "gulp-less2js",
   "description": "Transforms LESS variables to JSON objects",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "repository": {
     "type": "git",
     "url": "https://github.com/jkalina/gulp-less2js.git"
