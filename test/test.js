@@ -20,11 +20,11 @@ var createVinyl = function (lessFileName, contents) {
 
 describe('gulp-less2js', function () {
     describe('in buffer mode', function () {
-
+        
         it('should create json object from given less file', function (done) {
 
             var lessFile = createVinyl('variables.less');
-
+            
             var stream = less();
             stream.once('data', function (jsonFile) {
                 should.exist(jsonFile);
@@ -38,6 +38,40 @@ describe('gulp-less2js', function () {
             stream.write(lessFile);
             stream.end();
         });
+        
+        it('should create json object without converting variable names to camelcase', function(done) {
 
+            var lessFile = createVinyl('variables.less');
+            
+            var stream = less({
+                camelCase: false
+            });
+            stream.once('data', function (jsonFile) {
+                String(jsonFile.contents).should.equal(
+                    fs.readFileSync(pj(__dirname, 'expect/variablesWithoutCamelcase.json'), 'utf8'));
+                done();
+            });
+            stream.write(lessFile);
+            stream.end();
+            
+        });
+
+        it('should create json object omitting prefixed variables', function(done) {
+
+            var lessFile = createVinyl('prefixedVariables.less');
+
+            var stream = less({
+                ignoreWithPrefix: 'prefix_'
+            });
+            stream.once('data', function (jsonFile) {
+                String(jsonFile.contents).should.equal(
+                    fs.readFileSync(pj(__dirname, 'expect/prefixedVariables.json'), 'utf8'));
+                done();
+            });
+            stream.write(lessFile);
+            stream.end();
+
+        });
+        
     });
 });

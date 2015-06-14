@@ -10,9 +10,9 @@ var through2 = require('through2'),
 
 var PLUGIN_NAME = 'gulp-less2js';
 
-var camelCase = function (input) {
-    return input.toLowerCase().replace(/-(.)/g, function(match, group1) {
-        return group1.toUpperCase();
+var convertToCamelcase = function (input) {
+    return input.toLowerCase().replace(/-(.)/g, function(match, group) {
+        return group.toUpperCase();
     });
 };
 
@@ -52,9 +52,14 @@ module.exports = function (options) {
 
             ruleset.rules.forEach(function (rule) {
                 if (rule.variable) {
+
+                    var name;
                     
-                    //TODO: make camelcase conversion optional
-                    var name = camelCase(rule.name.substr(1));
+                    if (options.camelCase === false) {
+                        name = rule.name.substr(1);
+                    } else {
+                        name = convertToCamelcase(rule.name.substr(1));
+                    }
 
                     if (!prefix || name.substr(0, prefix.length) !== prefix) {
                         var value = rule.value.value[0];
